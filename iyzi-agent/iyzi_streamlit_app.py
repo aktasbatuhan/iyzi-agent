@@ -142,8 +142,7 @@ def merge_data(search_data, url_data):
 
 
 def shopping_assistant(system_prompt_final_answer, initial_query, search_results):
-
-    # Call the OpenAI API to get the completion with streaming enabled
+    response = ""
     completion = client.chat.completions.create(
         model="gpt-4o",
         messages=[
@@ -153,13 +152,11 @@ def shopping_assistant(system_prompt_final_answer, initial_query, search_results
         stream=True
     )
 
-    # Directly print each chunk of the response as it arrives, on the same line
     for chunk in completion:
         if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end='', flush=True)
+            response += chunk.choices[0].delta.content
 
-    # Print a newline at the end to ensure any following output starts on a new line
-    print()
+    return response
 
 
 # Streamlit app
@@ -176,9 +173,9 @@ def main():
             json_response = iyzi_check(system_prompt_checker, merchant_list, results)
             try:
                 filtered_urls = json.loads(json_response)['urls']
-                st.debug(f"Filtered URL list from JSON: {filtered_urls}")
+                st.write(f"Filtrelenmiş URL listesi: {filtered_urls}")
             except (json.JSONDecodeError, KeyError) as e:
-                st.error(f"Error processing JSON or missing 'urls' key: {e}")
+                st.error(f"JSON işleme hatası veya 'urls' anahtarı eksik: {e}")
                 return
 
             url_data = {}
@@ -186,13 +183,12 @@ def main():
                 future_to_url = {executor.submit(get_url_data, url): url for url in filtered_urls}
                 for future in as_completed(future_to_url):
                     url = future_to_url[future]
-                    st.debug(f"Requesting URL: {url}")
                     try:
                         data = future.result()
                         if data:
                             url_data[url] = data
                     except Exception as exc:
-                        st.error(f"{url} generated an exception: {exc}")
+                        st.error(f"{url} için bir hata oluştu: {exc}")
 
             merged_data = {url: url_data.get(url, {}) for url in filtered_urls}
             
