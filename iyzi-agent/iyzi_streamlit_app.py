@@ -100,13 +100,13 @@ def get_search_results(initial_query, search_location, search_gl, search_hl, ser
         return {}
     
 
-def iyzi_check(system_promp_checker, merchant_list, results):
+def iyzi_check(system_prompt_checker, merchant_list, results):
     # Initialize the OpenAI client
     # Call the OpenAI API to get the completion
     completion = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4-turbo",
         messages=[
-            {"role": "system", "content": system_promp_checker },
+            {"role": "system", "content": system_prompt_checker },
             {"role": "user", "content": f"""Merchant list: {merchant_list}. /n/n
                                             Web Search Results:  {results}"""}
         ]
