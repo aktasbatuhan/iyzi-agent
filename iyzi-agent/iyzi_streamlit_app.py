@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
+serper_api_key = os.getenv('SERPER_API_KEY')
 
-serper_api_key = '464d7cb1c6cc0c7492740c83443b7fa1e8ce6519'
 search_query = "apple inc"
 search_location = "Turkey"
 search_gl = "tr"
@@ -122,7 +122,7 @@ def iyzi_check(system_promp_checker, merchant_list, results):
 def get_url_data(url: str) -> dict:
     headers = {
         "Accept": "application/json",
-        "Authorization": "Bearer jina_f248aa5b86774e87a844cc1c95d15e3fap_EJ6I6_E8Qzx3RhTLv2q8rqvLn"
+        "Authorization": f"Bearer {os.getenv('JINA_BEARER_TOKEN')}" 
     }
 
     # Log the URL to be requested
