@@ -164,7 +164,7 @@ def shopping_assistant(system_prompt_final_answer, initial_query, search_results
 
 # Streamlit app
 def main():
-    st.title("iyzico Alışveriş Assistants")
+    st.title("iyzico Alışveriş Asistanı")
 
     # User input
     initial_query = st.text_input("iyzico Geçerli Mağazalarda Ürün Arayın:")
