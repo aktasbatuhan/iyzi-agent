@@ -173,7 +173,7 @@ def main():
             json_response = iyzi_check(system_prompt_checker, merchant_list, results)
             try:
                 filtered_urls = json.loads(json_response)['urls']
-                st.write(f"Ürün linkleri bulundu, cevap hazırlanıyor : {filtered_urls}")
+                st.write(f"Ürün linkleri bulundu, cevap hazırlanıyor...")
             except (json.JSONDecodeError, KeyError) as e:
                 st.error(f"JSON işleme hatası veya 'urls' anahtarı eksik: {e}")
                 return
