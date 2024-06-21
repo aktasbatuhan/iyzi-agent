@@ -287,7 +287,7 @@ def get_search_results(initial_query, search_location, search_gl, search_hl, ser
         "location": search_location,
         "gl": search_gl,
         "hl": search_hl,
-        "num": 50
+        "num": 150
     })
     headers = {
         'X-API-KEY': serper_api_key,
