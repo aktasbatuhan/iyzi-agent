@@ -412,7 +412,7 @@ def main():
         with col2:
             with st.spinner("Ürünler inceleniyor..."):
                 merged_data = {domain: search_results[domain] for domain in final_url_list}
-                limited_data = sort_and_limit_urls(merged_data, limit=5)
+                limited_data = sort_and_limit_urls(merged_data, limit=3)
 
             st.success("✅ En uygun seçenekler bulundu")
 
