@@ -290,7 +290,7 @@ def get_search_results(initial_query, search_location, search_gl, search_hl, ser
         "location": search_location,
         "gl": search_gl,
         "hl": search_hl,
-        "num": 150
+        "num": 100
     })
     headers = {
         'X-API-KEY': serper_api_key,
@@ -374,7 +374,7 @@ def merge_data(search_data, url_data):
 
 def shopping_assistant(system_prompt_final_answer, initial_query, search_results):
     stream = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-2024-05-13",
         messages=[
             {"role": "system", "content": system_prompt_final_answer},
             {"role": "user", "content": f"User query: {initial_query}.\n\nWeb Search Results: {search_results}"}
