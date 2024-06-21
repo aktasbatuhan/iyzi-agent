@@ -418,14 +418,14 @@ def main():
                 merged_data = {domain: search_results[domain] for domain in final_url_list}
                 limited_data = sort_and_limit_urls(merged_data, limit=3)
 
-            st.success("✅ En uygun seçenekler bulundu")
+            st.success("✅ En uygun ürünler bulundu")
 
         # Create expandable sections for both lists
         with st.expander("Bulunan iyzico mağazaları"):
             for domain in final_url_list:
                 st.write(f"- {domain}")
 
-        st.subheader("Sonuçlar:")
+        st.subheader("Seçilen Ürünler:")
         # Create a placeholder for the streaming content
         results_placeholder = st.empty()
         
